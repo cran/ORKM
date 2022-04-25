@@ -5,7 +5,7 @@
 Caculate the estimator on the ORKMeans method
 }
 \usage{
-ORKMeans(X, K, V, chushi, yita, gamma, truere, max.iter, method = 0)
+ORKMeans(X,K,V,chushi,r,yita,gamma,alpha,epsilon,truere,max.iter,method=0)
 }
 \arguments{
   \item{X}{
@@ -23,8 +23,17 @@ is the initial value for online
   \item{yita}{
 is the regularized parameter
 }
-  \item{gamma}{
+  \item{r}{
 is the banlance parameter
+}
+  \item{gamma}{
+is the step size 
+}
+  \item{alpha}{
+is the caculated the weight of view 
+}
+  \item{epsilon}{
+is the epsilon 
 }
   \item{truere}{
 is the ture label in data set
@@ -37,7 +46,7 @@ is the caluate the NMI
 }
 }
 \value{
-mvNM,mvAlpha1,mvonM,mvresult
+mvNMI,mvAlpha1,mvonM,mvresult
 }
 
 \author{
@@ -46,7 +55,7 @@ Miao Yu
 \examples{
 library(MASS) 
 library(Matrix)  
-  yita=0.5;V=2;chushi=100;K=3;gamma=0.5;max.iter=10;n1=n2=n3=70
+  yita=0.5;V=2;chushi=100;K=3;r=0.5;max.iter=10;n1=n2=n3=70;gamma=0.1;alpha=0.98;epsilon=1
   X1<-rnorm(n1,20,2);X2<-rnorm(n2,25,1.5);X3<-rnorm(n3,30,2) 
   Xv<-c(X1,X2,X3)
   data<-matrix(Xv,n1+n2+n3,2)
@@ -66,6 +75,6 @@ library(Matrix)
   view2<-matrix(view[2,])
   X1<-matrix(view1,n1+n2+n3,1)
   X2<-matrix(view2,n1+n2+n3,1)
-  ORKMeans(X=X1,K=K,V=V,chushi=chushi,yita=yita,gamma=gamma,
+  ORKMeans(X=X1,K=K,V=V,r=r,chushi=chushi,yita=yita,gamma=gamma,epsilon=epsilon,
 max.iter=max.iter,truere=truere,method=0)
 }

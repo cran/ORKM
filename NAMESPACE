@@ -2,9 +2,12 @@
 
 importFrom(MASS, ginv)
 importFrom(Matrix, Matrix)
+importFrom(stats, runif)
 
 export(ORKMeans)
 export(RKMeans)
 export(KMeans)
 export(PKMeans)
 export(DMC)
+export(OGD)
+export(OMU)

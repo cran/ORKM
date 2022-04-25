@@ -1,9 +1,11 @@
-3cc13d171c48964d94b6cd90e827ba67 *DESCRIPTION
+ee718a6bff54046340c95a718ce4f8ac *DESCRIPTION
 c1dff1d519dc9bd341b58351b90ccaf7 *LICENSE
-85acacc63a4588cd3e77d80a8dc5c190 *NAMESPACE
+24ce4fe512325b4a1d1082397e819720 *NAMESPACE
 d291864a4a4686e6794ab6d925d6a3e9 *R/DMC.R
 3235b5717ca2697f272fb4fe786930f9 *R/KMeans.R
-ce4b73de0ef6817afb41af0b24dc6281 *R/ORKMeans.R
+eef87b26589c1af3c846df0bdbbdef3f *R/OGD.R
+b593b75f8b6ed05da5df17c56f589f2d *R/OMU.R
+ec7ebea6d618cf46c6c11eec02e92217 *R/ORKMeans.R
 7e7c07aa57cbde5d7c26eb19510c2ff4 *R/PKMeans.R
 18450b1371cdca698af634c240162415 *R/RKMeans.R
 ac0c3ecc84f3c1f75b82fc28caa3ce45 *data/citesview1.rda
@@ -14,7 +16,9 @@ f4bd07c22b57108456ce412712b09919 *data/citesview4.rda
 fbb27fa77410845af93d3d8486d0ada4 *data/sobar.rda
 5145c680d602ca2577df1ea354f68b1f *man/DMC.Rd
 c5ff9a39002db944cfb9ae88fae4fd1e *man/KMeans.Rd
-043e7fee92c4073d9c659ea1745c88c5 *man/ORKMeans.Rd
+a89cddbec19185e728dcb0abbf364207 *man/OGD.Rd
+2c5f719c97043f41743cbca74ae106f8 *man/OMU.Rd
+0f4afa26c5b95bea6b7208f3caeb1169 *man/ORKMeans.Rd
 8c57f8c51f6f3f4c48a0effa93c782b1 *man/PKMeans.Rd
 27e5dec8b883be1ee5da72efca46212d *man/RKMeans.Rd
 d00db3244d7322dceacbd1e5c9b4e1da *man/citesview1.Rd

@@ -1,7 +1,7 @@
 Package: ORKM
 Title: The Online Regularized K-Means Clustering Algorithm
-Date: 2022-1-19
-Version: 0.0.0.3
+Date: 2022-4-25
+Version: 0.0.2.1
 Authors@R: c(person("Guangbao", "Guo",role = c("aut", "cre"),
            email = "ggb11111111@163.com",
           comment =  c(ORCID = "0000-0002-4115-6218")),
@@ -20,10 +20,10 @@ Author: Guangbao Guo [aut, cre] (<https://orcid.org/0000-0002-4115-6218>),
   Ruiling Niu [aut]
 Maintainer: Guangbao Guo <ggb11111111@163.com>
 Suggests: testthat (>= 3.0.0)
-Imports: MASS, Matrix,
+Imports: MASS, Matrix, stats,
 Config/testthat/edition: 3
 NeedsCompilation: no
-Packaged: 2022-01-19 13:56:46 UTC; lenovo
+Packaged: 2022-04-25 13:44:53 UTC; lenovo
 Depends: R (>= 3.5.0)
 Repository: CRAN
-Date/Publication: 2022-01-20 18:42:42 UTC
+Date/Publication: 2022-04-25 14:20:02 UTC

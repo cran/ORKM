@@ -1,11 +1,14 @@
 #' Caculate the pardon matrix and the estimator on the online RKMeans
-ORKMeans=function(X,K,V,chushi,yita,gamma,truere,max.iter,method=0){
+ORKMeans=function(X,K,V,chushi,r,yita,gamma,alpha,epsilon,truere,max.iter,method=0){
 #' param X is the data matrix
 #' param K is the number of cluster  
 #' param yita is the regularized parameter
-#' param gamma is the banlance parameter
+#' param r is the banlance parameter
+#' param gamma is the step size
+#' param alpha is the caculated the weight of view
 #' param V is the view of X
 #' param chushi is the initial value for online
+#' param epsilon is the epsilon
 #' param max.iter is the max iter
 #' param truere is the ture label in data set
 #' param method is the caluate the NMI
@@ -14,7 +17,7 @@ ORKMeans=function(X,K,V,chushi,yita,gamma,truere,max.iter,method=0){
 #' @export
 #'
 #' @examples   
-#'  yita=0.5;V=2;chushi=100;K=3;gamma=0.5;max.iter=10;n1=n2=n3=70
+#'  yita=0.5;V=2;chushi=100;K=3;r=0.5;max.iter=10;n1=n2=n3=70;gamma=0.1;alpha=0.98;epsilon=1
 #'  X1<-rnorm(n1,20,2);X2<-rnorm(n2,25,1.5);X3<-rnorm(n3,30,2) 
 #'  Xv<-c(X1,X2,X3)
 #'  data<-matrix(Xv,n1+n2+n3,2)
@@ -34,7 +37,7 @@ ORKMeans=function(X,K,V,chushi,yita,gamma,truere,max.iter,method=0){
 #'  view2<-matrix(view[2,])
 #'  X1<-matrix(view1,n1+n2+n3,1)
 #'  X2<-matrix(view2,n1+n2+n3,1)
-#'  ORKMeans(X=X1,K=K,V=V,chushi=chushi,yita=yita,gamma=gamma,max.iter=max.iter,truere=truere,method=0)
+#'  ORKMeans(X=X1,K=K,V=V,chushi=chushi,r=r,yita=yita,gamma=gamma,alpha=alpha,epsilon=epsilon,max.iter=max.iter,truere=truere,method=0)
  if (V<=1){
 ## KMeans for single-view
 N<- nrow(X) 
@@ -97,13 +100,16 @@ onM<-oM
   onU<-matrix(0,N,K)
   onC2<-c(0,N,1)
 P2<-matrix(0,1,N)
+ling<-matrix(0,N-chushi,K)
+onU<-rbind(oU,ling)
 for (i in (chushi+1):N){
     for(k in 1:K){ 
  oo<-matrix(X[i,]-onM[k,],nrow=1,ncol=J) 
-          onC1[i,k]<-exp(-(oo%*%t(oo))/yita)
-      }
+          onC1[i,k]<-onU[i-1,k]%*%exp(-(oo%*%t(oo))/yita)
  onC2[i]<-sum(onC1[i,])
      onU[i,]<-onC1[i,]/onC2[i]
+      }
+onU[which(onU==NaN)]=0
        onM2<-matrix(0,K,J)
   onk1<-which.max(onU[i,])
  P2[i]<-onk1
@@ -115,6 +121,7 @@ for (i in 1:chushi){
  P2[i]<-ok1
 }
 }
+
 ######### KMeans for multi-view
   if (V>1){
 N1<-nrow(X)
@@ -140,7 +147,7 @@ M11 <- matrix(0,nrow=K,ncol=cJ1)
 for (k in 1:K){ 
     M1[k,] <- cX[SJS[k],] 
     M1 <- matrix(M1,K,cJ1)
-      }    # Random center matrix 
+      }     
 change=1
 cu<-matrix(0,1,K)
 cg<-matrix(0,1,K)
@@ -180,47 +187,69 @@ change=norm((M11-M1),type="1")
 iter=(iter+1)
 }
 
-alpha<-0.98
-cM1<-matrix(0,chushi,K)
-cM1<-t(M1)
+alpha<-alpha
+oM1<-matrix(0,cJ1,K)
+oM1<-t(M1)
+A<-matrix(0,N1,K) 
 ochange=1
-tU1<-matrix(0,nrow=N1,ncol=K)
-for(i in 1:N1 )  {
- mr=sample(1:K,1,replace=FALSE)
-tU1[i,mr]=1
-}  
-u<-matrix(0,1,K)
-g<-matrix(0,1,K)
-value<-matrix(0,1,K)
-P1<-matrix(0,1,N1)
-Mt1<-matrix(0,N1,K)
+gamma=gamma
+r=r
+oU1<-matrix(0,nrow=N1,ncol=K)
+onU1<-matrix(0,nrow=N1,ncol=K)
+pU1<-matrix(0,nrow=N1,ncol=K)
+pu<-c(rep(0,K))
+P1<-c(rep(0,N1))
+
+D<-diag(N1) 
+Dwave<-alpha*D 
 for (i in (chushi+1):N1){
-D<-diag(N1)
-Dwave<-alpha*D  
-Mt1<- t(matrix(X[i,],1,J1))%*%matrix(Dwave[i,i],1,1)%*%tU1[i,]%*%ginv(t(tU1)%*%Dwave%*%tU1)
-onM<-t(Mt1) #online update clustering center matrix 
-    for (k in 1:K){
-  g[k]=1
-  value[k]=alpha*norm((t(X[i,])-g%*%onM),type="2")+yita*norm((g%*%t(g)),type="1")
-g<-matrix(0,1,K)
+
+ling<-matrix(0,N1-chushi,K)
+onU1<-rbind(cU1,ling)
+g = 1
+A[1:i,]<-X[1:i,]%*%oM1
+epsilon <- epsilon
+
+dJ <- function(onU1){
+  return((2* Dwave[1:i,1:i]%*% onU1[1:i,]%*%t(oM1) %*%oM1+2*yita*onU1[1:i,]-2*Dwave[1:i,1:i]%*% A[1:i,]))
 }
-  k1<-which.min(value)
- P1[i]<-k1
- u[k1]=1
-tU1[i,]<-u
-u<-matrix(0,1,K)
-value<-matrix(0,1,K)
-value5<-c(0,1,J1-(chushi+1))
-value5[i]<-norm((t(X[i,])- tU1[i,]%*%onM),type="1")
-D[i,i]<-(1/(2*value5[i]))
-value6<-diag(value5[i])
-value7<-sum(value6) 
-Alpha1<-(gamma*value7)^(1/(1-gamma))
+J <- function(onU1){
+  onUU<-onU1[1:i,]%*%t(onU1[1:i,])
+  onUU[which(onUU==Inf)]=1
+  return(alpha*(norm((X[1:i,]-onU1[1:i,]%*%t(oM1)),type="1")+yita*sum(diag(onUU))))
+}
+
+while(TRUE){
+  gradient = dJ(onU1)
+  last_onU1 = onU1
+  onU1[1:i,] = onU1[1:i,] - gamma * gradient
+  g <- g+1    
+  if (abs(J(onU1) - J(last_onU1)) < epsilon){
+    break
+  }
+}
+}
+
+for (i in (chushi+1):N1){
+k1<-which.max(onU1[i,])
+P1[i]<-k1 
+pu[k1]<-1
+pU1[i,]<-pu
+pu<-c(rep(0,K))
+onM1= t(X[1:i,])%*%Dwave[1:i,1:i]%*%pU1[1:i,]%*%ginv(t(pU1[1:i,])%*%Dwave[1:i,1:i]%*%pU1[1:i,])
+
 }
 for (i in 1:chushi){
- P1[i]<-cP1[i]
+pU1[i,]<-cU1[i,]
+P1[i]<-cP1[i]
 }
+value<-c(rep(0,N1))
+for (i in chushi:N1){
+value [i]<-r*norm((X[1:i,]- pU1[1:i,]%*%t(onM1)),type="1")  
 }
+value1<-sum(value^(1/(1-r)))  
+Alpha1<-(r* value[i]^(1/(1-r)) /value1)
+
  if(V<=1){
 ccc<-c(P2)
 }else{ccc<-c(P1)
@@ -244,9 +273,6 @@ list(svNMI=NMI,svonM=onM,svresult=ccc)
 )
 }else {
 return(
-list(mvNMI=NMI,mvAlpha1=Alpha1,mvonM=onM,mvresult=ccc)
+list(mvNMI=NMI,mvAlpha1=Alpha1,mvonM=onM1,mvresult=ccc)
 )
-}}
-
-
-
+}}}
