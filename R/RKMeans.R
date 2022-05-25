@@ -1,19 +1,19 @@
 #' Caculate the pardon matrix and the estimator on the RKMeans
-RKMeans=function(X,K,V,yita,gamma,max.iter,truere,method=0){
+RKMeans=function(X,K,V,yita,r,max.iter,truere,method=0){
 #' param X is the data matrix
 #' param K is the number of cluster  
 #' param yita is the regularized parameter
-#' param gamma is the banlance parameter
+#' param r is the banlance parameter
 #' param V is the view of X
 #' param max.iter is the max iter
 #' param truere is the ture label in data set
 #' param method is the caluate the NMI
 #' 
-#' @return mvNM,mvAlpha1,mvonM,mvresult
+#' @return NMI,weight,center,result
 #' @export
 #'
 #' @examples  
-#'  yita=0.5;V=2;K=3;gamma=0.5;max.iter=10;n1=n2=n3=70
+#'  yita=0.5;V=2;K=3;r=0.5;max.iter=10;n1=n2=n3=70
 #'  X1<-rnorm(n1,20,2);X2<-rnorm(n2,25,1.5);X3<-rnorm(n3,30,2) 
 #'  Xv<-c(X1,X2,X3)
 #'  data<-matrix(Xv,n1+n2+n3,2)
@@ -33,7 +33,7 @@ RKMeans=function(X,K,V,yita,gamma,max.iter,truere,method=0){
 #'  view2<-matrix(view[2,])
 #'  X1<-matrix(view1,n1+n2+n3,1)
 #'  X2<-matrix(view2,n1+n2+n3,1)
-#'  RKMeans(X=X1,K=K,V=V,yita=yita,gamma=gamma,max.iter=max.iter,truere=truere,method=0)
+#'  RKMeans(X=X1,K=K,V=V,yita=yita,r=r,max.iter=max.iter,truere=truere,method=0)
 
  if (V<=1){
 ## RKMeans for single-view
@@ -89,7 +89,6 @@ for(i in 1:rows){
         iter=(iter+1) 
  changed=norm((M11-M1),type="1")
   }}
-################## RKMeans for multi-views
   if (V>1){
 X1<-as.matrix(X) 
 N1<-nrow(X1)
@@ -145,14 +144,16 @@ D[j,j]<-(1/(2*value5))
 }
 value6<-diag(value5)
 value7<-sum(value6) 
-Alpha1<-(gamma*value7)^(1/(1-gamma))
+Alpha1<-(r*value7)^(1/(1-r))
 change=norm((M11-M1),type="1")
 iter=(iter+1)
 }
  }
     if(V<=1){
 ccc<-c(ukiMatrix[,1])
+weight=1
 }else{ccc<-c(P1)
+weight=Alpha1
 }
 if(method==0){
 kmfrequency<-as.data.frame(table(ccc))  
@@ -168,7 +169,7 @@ MI<-H_indexre+H_truere- H_paste
 NMI<-MI/sqrt(H_indexre* H_truere)
 } 
  return(
-list(mvNMI=NMI,mvAlpha=Alpha,mvM1=M1,mvresult=ccc)
+list(NMI=NMI,weight=weight,center=M1,result=ccc)
 )}
 
 

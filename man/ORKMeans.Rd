@@ -46,7 +46,7 @@ is the caluate the NMI
 }
 }
 \value{
-mvNMI,mvAlpha1,mvonM,mvresult
+NMI,weight,center,result
 }
 
 \author{

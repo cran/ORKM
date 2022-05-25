@@ -1,19 +1,19 @@
 #' Caculate the pardon matrix and the estimator on the DMC method
-DMC=function(X,K,V,gamma,lamda,truere,max.iter,method=0){
+DMC=function(X,K,V,r,lamda,truere,max.iter,method=0){
 #' param X is the data matrix
 #' param K is the number of cluster  
 #' param lamda is the parameter
-#' param gamma is the banlance parameter
+#' param r is the banlance parameter
 #' param V is the view of X
 #' param max.iter is the max iter
 #' param truere is the ture label in data set
 #' param method is the caluate the NMI
 #' 
-#' @return dNMI,Alpha1,M1
+#' @return NMI,Alpha1,center,result
 #' @export
 #'
 #' @examples  
-#'  V=2;lamda=0.5;K=3;gamma=0.5;max.iter=10;n1=n2=n3=70
+#'  V=2;lamda=0.5;K=3;r=0.5;max.iter=10;n1=n2=n3=70
 #'  X1<-rnorm(n1,20,2);X2<-rnorm(n2,25,1.5);X3<-rnorm(n3,30,2) 
 #'  Xv<-c(X1,X2,X3)
 #'  data<-matrix(Xv,n1+n2+n3,2)
@@ -33,14 +33,14 @@ DMC=function(X,K,V,gamma,lamda,truere,max.iter,method=0){
 #'  view2<-matrix(view[2,])
 #'  X1<-matrix(view1,n1+n2+n3,1)
 #'  X2<-matrix(view2,n1+n2+n3,1)
-#'  DMC(X=X1,K=K,V=V,gamma=gamma,lamda=lamda,truere=truere,max.iter=max.iter,method=0)
+#'  DMC(X=X1,K=K,V=V,r=r,lamda=lamda,truere=truere,max.iter=max.iter,method=0)
 
 iter=1
 
 X11<-as.matrix(X) 
 X1<-t(X11)
 N1<-nrow(X1)
-J1<-ncol(X1) #2708*2708
+J1<-ncol(X1) 
 X1<-as.matrix(X1) 
 alpha<-1/V 
 M1 <- matrix(0,nrow=N1,ncol=K)
@@ -58,19 +58,16 @@ HM[mr,i]=1
 }  
 HMI<-matrix(0,nrow=N1,ncol=J1) 
 
-while(change>0.1){
-if(iter>=max.iter)
-break
-M1=M11
+
 HMI<-M1%*%HM   
 Mfront<-ginv(t(M1)%*%M1)  
-Mmid<-(alpha^gamma)*t(M1)%*%X1%*%t(HMI) 
-Mlast<-ginv((alpha^gamma)*HMI%*%t(HMI))  
+Mmid<-(alpha^r)*t(M1)%*%X1%*%t(HMI) 
+Mlast<-ginv((alpha^r)*HMI%*%t(HMI))  
 M1<-t(Mfront%*%Mmid%*%Mlast)
 Q1<-matrix(0,nrow=K,ncol=J1)
-Q1<-(alpha)^gamma*t(M1)%*%X1    
+Q1<-(alpha)^r*t(M1)%*%X1    
 P1<-matrix(0,nrow=K,ncol=K)
-P1<-alpha^gamma*t(M1)%*%M1  
+P1<-alpha^r*t(M1)%*%M1  
 
 FM<-matrix(0,nrow=K,ncol=J1)
 FM<-HM%*%t(HM)%*%HM   
@@ -104,10 +101,8 @@ HMlast[is.na(HMlast)]<-0
 HM<-HM*HMlast  
 HM[is.na(HM)]<-0
 thtaM<-norm((X1- M1%*%HM),type="1") 
-Alpha1<-(gamma* thtaM)^(1/(1-gamma))  
-change=norm((M11-M1),type="1")
-iter=(iter+1)
-}
+Alpha1<-(r* thtaM)^(1/(1-r))  
+
 
 for (j in 1:J1){
  for (k in 1:K){
@@ -135,6 +130,6 @@ MI<-H_indexre+H_truere- H_paste
 NMI<-MI/sqrt(H_indexre* H_truere)
 } 
  return(
-list(dNMI=NMI,Alpha1=Alpha1,M1=M1)
+list(NMI=NMI,Alpha1=Alpha1,center=M1,result=ccc)
 )}
 

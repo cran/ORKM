@@ -118,8 +118,7 @@ cheng2<-matrix(0,N1,K)
 cheng3<-matrix(0,J1,K)
 cheng4<-matrix(0,J1,K)
 
- for (g in 1:3){
-g=g+1
+
 cheng1=(X1%*%oM1)
 cheng2=(onU1%*%t(oM1)%*%oM1)
 onU1=onU1*(cheng1/cheng2)
@@ -129,7 +128,7 @@ cheng4=oM1%*%t(onU1)%*%onU1
 oM1=oM1*(cheng3/cheng4)
 
 
-}
+
 for (i in (chushi+1):N1){
 k1<-which.max(onU1[i,])
 P2[i]<-k1 

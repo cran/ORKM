@@ -9,7 +9,7 @@ PKMeans=function(X,K,yitapower,sm,max.m,truere,method=0){
 #' param truere is the ture label in data set
 #' param method is the caluate the NMI
 #' 
-#' @return wM,wNMI
+#' @return center,NMI,result
 #' @export
 #'
 #' @examples   
@@ -94,6 +94,6 @@ MI<-H_indexre+H_truere- H_paste
 NMI<-MI/sqrt(H_indexre* H_truere)
 } 
 return(
-list(wM=wM,pNMI=NMI))}
+list(center=wM,NMI=NMI,result=ccc))}
 
 

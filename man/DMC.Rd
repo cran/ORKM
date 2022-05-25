@@ -5,7 +5,7 @@
 Caculate the estimator on the DMC method
 }
 \usage{
-DMC(X, K, V, gamma, lamda, truere, max.iter, method = 0)
+DMC(X, K, V, r, lamda, truere, max.iter, method = 0)
 }
 \arguments{
   \item{X}{data matrix}
@@ -14,7 +14,7 @@ DMC(X, K, V, gamma, lamda, truere, max.iter, method = 0)
 
   \item{V}{number of view}
 
-  \item{gamma}{first banlance parameter}
+  \item{r}{first banlance parameter}
 
   \item{lamda}{second balance parameter}
 
@@ -25,14 +25,14 @@ DMC(X, K, V, gamma, lamda, truere, max.iter, method = 0)
   \item{method}{caculate the index of NMI}
 }
 \value{
-dNMI,Alpha1,M1
+NMI,Alpha1,center,result
 }
 \author{
 Miao Yu
 }
 \examples{
  library(MASS)   
- V=2;lamda=0.5;K=3;gamma=0.5;max.iter=10;n1=n2=n3=70
+ V=2;lamda=0.5;K=3;r=0.5;max.iter=10;n1=n2=n3=70
  X1<-rnorm(n1,20,2);X2<-rnorm(n2,25,1.5);X3<-rnorm(n3,30,2) 
  Xv<-c(X1,X2,X3)
  data<-matrix(Xv,n1+n2+n3,2)
@@ -52,5 +52,5 @@ Miao Yu
  view2<-matrix(view[2,])
  X1<-matrix(view1,n1+n2+n3,1)
  X2<-matrix(view2,n1+n2+n3,1)
- DMC(X=X1,K=K,V=V,lamda=lamda,gamma=gamma,max.iter=max.iter,truere=truere,method=0)
+ DMC(X=X1,K=K,V=V,lamda=lamda,r=r,max.iter=max.iter,truere=truere,method=0)
 }

@@ -33,7 +33,7 @@ is the caluate the NMI
 }
 }
 \value{
-wM,wNMI
+center,NMI,result
 }
 \author{
 Miao Yu

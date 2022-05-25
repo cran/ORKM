@@ -104,7 +104,7 @@ pU1<-matrix(0,nrow=N,ncol=K)
 onU=oU
 ling<-matrix(0,N-chushi,K)
 onU<-rbind(oU,ling)
-SJS<-runif(100, min = 0, max = 1)
+SJS<-runif(N, min = 0, max = 1)
  for (b in (chushi+1):N){
    onU[b,1]<-SJS[b]
    onU[b,2]<-SJS[N-b+1]
@@ -133,7 +133,7 @@ while(TRUE){
   last_onU = onU
   onU[i,k] = onU[i-1,k] - gamma * gradient
   g <- g+1  
-  if (abs(J1m[i,k] - J1m[i-1,k]) < 1.5){
+  if (abs(J1m[i,k] - J1m[i-1,k]) < epsilon){
     break
   }
 }

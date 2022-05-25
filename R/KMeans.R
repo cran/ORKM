@@ -1,18 +1,18 @@
 #' Caculate the pardon matrix and the estimator on the KMeans
-KMeans=function(X,K,V,gamma,max.iter,truere,method=0){
+KMeans=function(X,K,V,r,max.iter,truere,method=0){
 #' param X is the data matrix
 #' param K is the number of cluster  
 #' param V is the view of X
-#' param gamma is balance parameter
+#' param r is balance parameter
 #' param max.iter is the max iter
 #' param truere is the ture label in data set
 #' param method is the caluate the NMI
 #' 
-#' @return NMI,MVAlpha,M1,result
+#' @return NMI,weight,center,result
 #' @export
 #'
 #' @examples  
-#'  V=2;K=3;gamma=0.5;max.iter=10;n1=n2=n3=70
+#'  V=2;K=3;r=0.5;max.iter=10;n1=n2=n3=70
 #'  X1<-rnorm(n1,20,2);X2<-rnorm(n2,25,1.5);X3<-rnorm(n3,30,2) 
 #'  Xv<-c(X1,X2,X3)
 #'  data<-matrix(Xv,n1+n2+n3,2)
@@ -32,10 +32,10 @@ KMeans=function(X,K,V,gamma,max.iter,truere,method=0){
 #'  view2<-matrix(view[2,])
 #'  X1<-matrix(view1,n1+n2+n3,1)
 #'  X2<-matrix(view2,n1+n2+n3,1)
-#'  KMeans(X=X1,K=K,V=V,gamma=gamma,max.iter=max.iter,truere=truere,method=0)
+#'  KMeans(X=X1,K=K,V=V,r=r,max.iter=max.iter,truere=truere,method=0)
 
     if (V<=1){
-## KMeans for single-view
+
      rows <- nrow(X) 
      cols <- ncol(X)
      within <- matrix(0,nrow=K,ncol=1) 
@@ -80,7 +80,7 @@ KMeans=function(X,K,V,gamma,max.iter,truere,method=0){
     }
     iter=(iter+1) 
 } }
-## KMeans for multi-view
+
   if (V>1){
   N1=nrow(X)
   J1=ncol(X)
@@ -106,7 +106,7 @@ u<-matrix(0,1,K)
 g<-matrix(0,1,K)
 value<-matrix(0,1,K)
 P1<-matrix(0,1,N1)
-system.time(
+
 while(change>0.1){
 M11=M1
 if(iter>=max.iter)
@@ -134,14 +134,18 @@ D[j,j]<-(1/(2*value5))
 }
 value6<-diag(value5)
 value7<-sum(value6) 
-Alpha1<-(gamma*value7)^(1/(1-gamma))
+Alpha1<-(r*value7)^(1/(1-r))
 change=norm((M11-M1),type="1")
 iter=(iter+1)
 }
-) }
+ }
     if(V<=1){
 ccc<-c(indexMatrix[,1])
+center=M
+Alpha=1
 }else{ccc<-c(P1)
+center=M1
+Alpha=Alpha1
 }
 if(method==0){
 kmfrequency<-as.data.frame(table(ccc))  
@@ -157,5 +161,5 @@ MI<-H_indexre+H_truere- H_paste
 NMI<-MI/sqrt(H_indexre* H_truere)
 } 
  return(
-list(NMI=NMI,MVAlpha=Alpha1,M1=M1,result=ccc)
+list(NMI=NMI,weight=Alpha,center=center,result=ccc)
 )}

@@ -13,7 +13,7 @@ ORKMeans=function(X,K,V,chushi,r,yita,gamma,alpha,epsilon,truere,max.iter,method
 #' param truere is the ture label in data set
 #' param method is the caluate the NMI
 #' 
-#' @return mvNM,mvAlpha1,mvonM,mvresult
+#' @return NMI,weight,center,result
 #' @export
 #'
 #' @examples   
@@ -39,10 +39,9 @@ ORKMeans=function(X,K,V,chushi,r,yita,gamma,alpha,epsilon,truere,max.iter,method
 #'  X2<-matrix(view2,n1+n2+n3,1)
 #'  ORKMeans(X=X1,K=K,V=V,chushi=chushi,r=r,yita=yita,gamma=gamma,alpha=alpha,epsilon=epsilon,max.iter=max.iter,truere=truere,method=0)
  if (V<=1){
-## KMeans for single-view
 N<- nrow(X) 
 J<- ncol(X)
-oX<-matrix(X[1:chushi,],chushi,1)
+oX<-matrix(X[1:chushi,],chushi,J)
 oN<- nrow(oX) 
 oJ<- ncol(oX)
 oukiMatrix <- matrix(0,nrow=oN,ncol=2)
@@ -121,8 +120,6 @@ for (i in 1:chushi){
  P2[i]<-ok1
 }
 }
-
-######### KMeans for multi-view
   if (V>1){
 N1<-nrow(X)
 J1<-ncol(X)
@@ -222,7 +219,9 @@ J <- function(onU1){
 while(TRUE){
   gradient = dJ(onU1)
   last_onU1 = onU1
+  onU1[which(onU1==-Inf)]=0 
   onU1[1:i,] = onU1[1:i,] - gamma * gradient
+  onU1[which(onU1==-Inf)]=0 
   g <- g+1    
   if (abs(J(onU1) - J(last_onU1)) < epsilon){
     break
@@ -252,7 +251,11 @@ Alpha1<-(r* value[i]^(1/(1-r)) /value1)
 
  if(V<=1){
 ccc<-c(P2)
+reM=onM
+alpha=1
 }else{ccc<-c(P1)
+reM=onM1
+alpha=Alpha1
 }
 if(method==0){
 kmfrequency<-as.data.frame(table(ccc))  
@@ -267,12 +270,8 @@ H_paste<-(-sum(kf3*log(kf3)))
 MI<-H_indexre+H_truere- H_paste
 NMI<-MI/sqrt(H_indexre* H_truere)
 } 
-if(V<=1){
- return(
-list(svNMI=NMI,svonM=onM,svresult=ccc)
-)
-}else {
+
 return(
-list(mvNMI=NMI,mvAlpha1=Alpha1,mvonM=onM1,mvresult=ccc)
+list(NMI=NMI,weight=alpha,center=reM,result=ccc)
 )
-}}}
+}}

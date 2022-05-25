@@ -7,7 +7,7 @@ Caculate the pardon matrix and the estimator on the RKMeans
 Caculate the pardon matrix and the estimator on the RKMeans
 }
 \usage{
-RKMeans(X, K, V, yita, gamma, max.iter, truere, method = 0)
+RKMeans(X, K, V, yita, r, max.iter, truere, method = 0)
 }
 \arguments{
   \item{X}{
@@ -22,7 +22,7 @@ is the view of X
   \item{yita}{
 is the regularized parameter
 }
-  \item{gamma}{
+  \item{r}{
 is the banlance parameter
 }
   \item{max.iter}{
@@ -36,7 +36,7 @@ is the caluate the NMI
 }
 }
 \value{
-mvNM,mvAlpha1,mvonM,mvresult
+NMI,weight,center,result
 }
 \author{
 Miao Yu
@@ -44,7 +44,7 @@ Miao Yu
 \examples{
   library(MASS) 
   library(Matrix)  
-  yita=0.5;V=2;K=3;gamma=0.5;max.iter=10;n1=n2=n3=70
+  yita=0.5;V=2;K=3;r=0.5;max.iter=10;n1=n2=n3=70
   X1<-rnorm(n1,20,2);X2<-rnorm(n2,25,1.5);X3<-rnorm(n3,30,2) 
   Xv<-c(X1,X2,X3)
   data<-matrix(Xv,n1+n2+n3,2)
@@ -64,5 +64,5 @@ Miao Yu
   view2<-matrix(view[2,])
   X1<-matrix(view1,n1+n2+n3,1)
   X2<-matrix(view2,n1+n2+n3,1)
-  RKMeans(X=X1,K=K,V=V,yita=yita,gamma=gamma,max.iter=max.iter,truere=truere,method=0)
+  RKMeans(X=X1,K=K,V=V,yita=yita,r=r,max.iter=max.iter,truere=truere,method=0)
 }
