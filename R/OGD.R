@@ -36,6 +36,7 @@ OGD=function(X,K,gamma,max.m,chushi,yita,epsilon,truere,method=0){
 #'  X2<-matrix(view2,n1+n2+n3,1)
 #'  OGD(X=X1,K=K,gamma=gamma,max.m=max.m,chushi=chushi,yita=yita,epsilon=epsilon,truere=truere,method=0)
 
+changed=1
 N<- nrow(X) 
 J<- ncol(X)
 chushi=chushi
@@ -46,12 +47,13 @@ K=K
 oukiMatrix <- matrix(0,nrow=oN,ncol=2)
 iter=0
 yita<-yita
-max.m<-max.m
-changed=1
+max.iter<-max.m
 
  oM <- matrix(0,nrow=K,ncol=oJ)
  oM1 <- matrix(0,nrow=K,ncol=oJ)
+ set.seed(123)
  SJS <- as.vector(sample(1:oN,size=K))
+
   for (k in 1:K) { 
     oukiMatrix[SJS[k],1] <- k
     oM[k,] <- X[SJS[k],] 
@@ -59,11 +61,12 @@ changed=1
       }
   while(changed>0.00000001){ 
        oM1=oM
-       if(iter >= max.m)
+       if(iter >= max.iter)
         break
        oC1<-matrix(0,oN,K)
        oU<-matrix(0,oN,K)
-       oC2<-matrix(0,oN,1)    
+       oC2<-matrix(0,oN,1)
+      
        for (i in 1:oN){
               for(k in 1:K){
                    ooJ<-matrix(oX[i,]- oM[k,],nrow=1,ncol=oJ)
@@ -95,6 +98,7 @@ for(i in 1:oN){
         iter=(iter+1) 
  changed=norm((oM1-oM),type="1")
   }
+
 pu<-c(rep(0,K))
 P2<-c(rep(0,N))
 pU<-matrix(0,nrow=N,ncol=K)
@@ -109,8 +113,6 @@ SJS<-runif(N, min = 0, max = 1)
    onU[b,1]<-SJS[b]
    onU[b,2]<-SJS[N-b+1]
 }
-gamma=gamma
-epsilon=epsilon
 DJ<-matrix(0,N,K)
 J1m<-matrix(0,N,K)
 
@@ -149,14 +151,14 @@ pu<-c(rep(0,K))
 }
 if(method==0){
 ccc<-P2
-kmfrequency<-as.data.frame(table(ccc))  
+kmfrequency<-as.data.frame(table(ccc)) 
 kf1<-kmfrequency$Freq/length(ccc) 
 H_indexre<-(-sum(kf1*log(kf1)))
 tfrequency<-as.data.frame(table(truere)) 
 kf2<-tfrequency$Freq/length(truere) 
 H_truere<-(-sum(kf2*log(kf2)))
 cfrequency<-as.data.frame(table(paste(ccc,truere))) 
-kf3<-cfrequency$Freq/length(paste(ccc,truere))
+kf3<-cfrequency$Freq/length(paste(ccc,truere)) 
 H_paste<-(-sum(kf3*log(kf3)))
 MI<-H_indexre+H_truere- H_paste
 NMI<-MI/sqrt(H_indexre* H_truere)

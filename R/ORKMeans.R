@@ -39,6 +39,7 @@ ORKMeans=function(X,K,V,chushi,r,yita,gamma,alpha,epsilon,truere,max.iter,method
 #'  X2<-matrix(view2,n1+n2+n3,1)
 #'  ORKMeans(X=X1,K=K,V=V,chushi=chushi,r=r,yita=yita,gamma=gamma,alpha=alpha,epsilon=epsilon,max.iter=max.iter,truere=truere,method=0)
  if (V<=1){
+## KMeans for single-view
 N<- nrow(X) 
 J<- ncol(X)
 oX<-matrix(X[1:chushi,],chushi,J)
@@ -47,6 +48,8 @@ oJ<- ncol(oX)
 oukiMatrix <- matrix(0,nrow=oN,ncol=2)
 changed=2
 iter=0
+
+
  oM <- matrix(0,nrow=K,ncol=oJ)
  oM1 <- matrix(0,nrow=K,ncol=oJ)
  SJS <- as.vector(sample(1:oN,size=K))
@@ -101,6 +104,7 @@ onM<-oM
 P2<-matrix(0,1,N)
 ling<-matrix(0,N-chushi,K)
 onU<-rbind(oU,ling)
+
 for (i in (chushi+1):N){
     for(k in 1:K){ 
  oo<-matrix(X[i,]-onM[k,],nrow=1,ncol=J) 
@@ -114,13 +118,18 @@ onU[which(onU==NaN)]=0
  P2[i]<-onk1
      onM[onk1,]<-(onM[onk1,]+X[i,])/2
 }
+
 oP2<-matrix(0,1,N)
 for (i in 1:chushi){
   ok1<-which.max(oU[i,])
  P2[i]<-ok1
 }
+
 }
+
+######### KMeans for multi-view
   if (V>1){
+
 N1<-nrow(X)
 J1<-ncol(X)
 cX<-matrix(X[1:chushi,],chushi,J1)
@@ -208,6 +217,7 @@ A[1:i,]<-X[1:i,]%*%oM1
 epsilon <- epsilon
 
 dJ <- function(onU1){
+  onU1[which(onU1==-Inf)]=0 
   return((2* Dwave[1:i,1:i]%*% onU1[1:i,]%*%t(oM1) %*%oM1+2*yita*onU1[1:i,]-2*Dwave[1:i,1:i]%*% A[1:i,]))
 }
 J <- function(onU1){
@@ -221,11 +231,13 @@ while(TRUE){
   last_onU1 = onU1
   onU1[which(onU1==-Inf)]=0 
   onU1[1:i,] = onU1[1:i,] - gamma * gradient
-  onU1[which(onU1==-Inf)]=0 
-  g <- g+1    
+  onU1[which(onU1==-Inf)]=0
+  g <- g+1
+  
   if (abs(J(onU1) - J(last_onU1)) < epsilon){
     break
   }
+
 }
 }
 
@@ -248,7 +260,7 @@ value [i]<-r*norm((X[1:i,]- pU1[1:i,]%*%t(onM1)),type="1")
 }
 value1<-sum(value^(1/(1-r)))  
 Alpha1<-(r* value[i]^(1/(1-r)) /value1)
-
+}
  if(V<=1){
 ccc<-c(P2)
 reM=onM
@@ -274,4 +286,5 @@ NMI<-MI/sqrt(H_indexre* H_truere)
 return(
 list(NMI=NMI,weight=alpha,center=reM,result=ccc)
 )
-}}
+
+}

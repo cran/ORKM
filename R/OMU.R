@@ -39,16 +39,11 @@ OMU=function(X,K,V,chushi,yita,r,max.iter,epsilon,truere,method=0){
 X1<-as.matrix(X)
 N1<-nrow(X1)
 J1<-ncol(X1)
-chushi=chushi
 cX1<-matrix(X1[1:chushi,],chushi,J1) 
 
 cN1<-nrow(cX1)
 cJ1<-ncol(cX1)
-K=K 
-r<-r 
-iter=0   
-yita<-yita  
-V=V   
+iter=0      
 alpha<-1/V  
 max.iter<-max.iter 
 D<-diag(cN1)    
@@ -70,7 +65,7 @@ cu<-matrix(0,1,K)
 cg<-matrix(0,1,K)
 cvalue<-matrix(0,1,K)
 cP1<-matrix(0,1,cN1)
-
+system.time(
 while(change>0.1){
 M11=M1
 if(iter>=max.iter)
@@ -103,12 +98,14 @@ Alpha1<-(r*value7)^(1/(1-r))
 change=norm((M11-M1),type="1")
 iter=(iter+1)
 }
+)
 
 
 oM1<-matrix(0,cJ1,K)
 oM1<-M1
 onU1<-matrix(0,nrow=N1,ncol=K)
 onU1<-matrix(runif(K,0,1),N1,K)
+
 pU1<-matrix(0,nrow=N1,ncol=K)
 pu<-c(rep(0,K))
 P2<-c(rep(0,N1))
@@ -143,12 +140,12 @@ P2[i]<-cP1[i]
 if(method==0){
 ccc<-c(P2)
 kmfrequency<-as.data.frame(table(ccc))  
-kf1<-kmfrequency$Freq/length(ccc) 
+kf1<-kmfrequency$Freq/length(ccc)
 H_indexre<-(-sum(kf1*log(kf1)))
 tfrequency<-as.data.frame(table(truere)) 
 kf2<-tfrequency$Freq/length(truere) 
 H_truere<-(-sum(kf2*log(kf2)))
-cfrequency<-as.data.frame(table(paste(ccc,truere)))
+cfrequency<-as.data.frame(table(paste(ccc,truere))) 
 kf3<-cfrequency$Freq/length(paste(ccc,truere)) 
 H_paste<-(-sum(kf3*log(kf3)))
 MI<-H_indexre+H_truere- H_paste

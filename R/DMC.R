@@ -35,16 +35,14 @@ DMC=function(X,K,V,r,lamda,truere,max.iter,method=0){
 #'  X2<-matrix(view2,n1+n2+n3,1)
 #'  DMC(X=X1,K=K,V=V,r=r,lamda=lamda,truere=truere,max.iter=max.iter,method=0)
 
-iter=1
-
 X11<-as.matrix(X) 
 X1<-t(X11)
 N1<-nrow(X1)
 J1<-ncol(X1) 
-X1<-as.matrix(X1) 
 alpha<-1/V 
 M1 <- matrix(0,nrow=N1,ncol=K)
  M11 <- matrix(0,nrow=N1,ncol=K)
+
  SJS <- as.vector(sample(1:J1,size=K))
 for (k in 1:K) { 
     M1[,k] <- X1[,SJS[k]] 
@@ -55,9 +53,8 @@ HM<-matrix(0,nrow=K,ncol=J1)
 for(i in 1:J1 )  {
  mr=sample(1:K,1,replace=FALSE)
 HM[mr,i]=1
-}  
+} 
 HMI<-matrix(0,nrow=N1,ncol=J1) 
-
 
 HMI<-M1%*%HM   
 Mfront<-ginv(t(M1)%*%M1)  
@@ -104,6 +101,7 @@ thtaM<-norm((X1- M1%*%HM),type="1")
 Alpha1<-(r* thtaM)^(1/(1-r))  
 
 
+
 for (j in 1:J1){
  for (k in 1:K){
  if(k==which.max(HM[,j])){
@@ -124,7 +122,7 @@ tfrequency<-as.data.frame(table(truere))
 kf2<-tfrequency$Freq/length(truere) 
 H_truere<-(-sum(kf2*log(kf2)))
 cfrequency<-as.data.frame(table(paste(ccc,truere))) 
-kf3<-cfrequency$Freq/length(paste(ccc,truere))
+kf3<-cfrequency$Freq/length(paste(ccc,truere)) 
 H_paste<-(-sum(kf3*log(kf3)))
 MI<-H_indexre+H_truere- H_paste
 NMI<-MI/sqrt(H_indexre* H_truere)

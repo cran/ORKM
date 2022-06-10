@@ -28,6 +28,7 @@ PKMeans=function(X,K,yitapower,sm,max.m,truere,method=0){
  powerMatrix <- matrix(0,nrow=rows,ncol=2) 
  M <- matrix(0,nrow=K,ncol=cols)
  M1 <- matrix(0,nrow=K,ncol=cols)
+
  SJS <- as.vector(sample(1:rows,size=K))
    for (k in 1:K) { 
     powerMatrix[SJS[k],1] <- k
@@ -94,6 +95,7 @@ MI<-H_indexre+H_truere- H_paste
 NMI<-MI/sqrt(H_indexre* H_truere)
 } 
 return(
-list(center=wM,NMI=NMI,result=ccc))}
+list(center=wM,NMI=NMI,result=ccc)
+)}
 
 

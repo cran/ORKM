@@ -1,7 +1,7 @@
 Package: ORKM
 Title: The Online Regularized K-Means Clustering Algorithm
-Date: 2022-5-25
-Version: 0.1.1.1
+Date: 2022-6-10
+Version: 0.3.0.0
 Authors@R: c(person("Guangbao", "Guo",role = c("aut", "cre"),
            email = "ggb11111111@163.com",
           comment =  c(ORCID = "0000-0002-4115-6218")),
@@ -13,7 +13,7 @@ Description: Algorithm of online regularized k-means to deal with online multi(s
  <doi:10.1080/02331888.2020.1823979>. 
 License: MIT + file LICENSE
 Encoding: UTF-8
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.0
 Author: Guangbao Guo [aut, cre] (<https://orcid.org/0000-0002-4115-6218>),
   Miao Yu [aut],
   Haoyue Song [aut],
@@ -23,7 +23,7 @@ Suggests: testthat (>= 3.0.0)
 Imports: MASS, Matrix, stats,
 Config/testthat/edition: 3
 NeedsCompilation: no
-Packaged: 2022-05-25 01:53:51 UTC; lenovo
+Packaged: 2022-06-10 02:41:05 UTC; 14482
 Depends: R (>= 3.5.0)
 Repository: CRAN
-Date/Publication: 2022-05-25 08:20:11 UTC
+Date/Publication: 2022-06-10 06:20:02 UTC

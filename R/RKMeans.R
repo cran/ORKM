@@ -35,7 +35,7 @@ RKMeans=function(X,K,V,yita,r,max.iter,truere,method=0){
 #'  X2<-matrix(view2,n1+n2+n3,1)
 #'  RKMeans(X=X1,K=K,V=V,yita=yita,r=r,max.iter=max.iter,truere=truere,method=0)
 
- if (V<=1){
+if (V<=1){
 ## RKMeans for single-view
 rows<- nrow(X) 
 cols<- ncol(X)
@@ -44,6 +44,7 @@ changed=2
 iter=0
  M1 <- matrix(0,nrow=K,ncol=cols)
  M11 <- matrix(0,nrow=K,ncol=cols)
+ set.seed(123)
  SJS <- as.vector(sample(1:rows,size=K))
   for (k in 1:K) { 
     ukiMatrix[SJS[k],1] <- k
@@ -89,22 +90,25 @@ for(i in 1:rows){
         iter=(iter+1) 
  changed=norm((M11-M1),type="1")
   }}
+################## RKMeans for multi-views
   if (V>1){
+
 X1<-as.matrix(X) 
 N1<-nrow(X1)
-J1<-ncol(X1) #2708*2708
+J1<-ncol(X1) 
 iter=1
 changed=2
-Alpha<-1/V 
-D<-diag(N1)  
+Alpha<-1/V  
+D<-diag(N1)   
+ 
 U1<-matrix(0,nrow=N1,ncol=K)
 for(i in 1:N1 )  {
  mr=sample(1:K,1,replace=FALSE)
 U1[i,mr]=1
 }  
-
 M1 <- matrix(0,nrow=K,ncol=J1)
 M11 <- matrix(0,nrow=K,ncol=J1)
+
  SJS <- as.vector(sample(1:N1,size=K))
 
 for (k in 1:K) { 
@@ -116,7 +120,7 @@ u<-matrix(0,1,K)
 g<-matrix(0,1,K)
 value<-matrix(0,1,K)
 P1<-matrix(0,1,N1)
-
+system.time(
 while(change>0.1){
 M11=M1
 if(iter>=max.iter)
@@ -148,6 +152,7 @@ Alpha1<-(r*value7)^(1/(1-r))
 change=norm((M11-M1),type="1")
 iter=(iter+1)
 }
+)
  }
     if(V<=1){
 ccc<-c(ukiMatrix[,1])
@@ -160,9 +165,9 @@ kmfrequency<-as.data.frame(table(ccc))
 kf1<-kmfrequency$Freq/length(ccc) 
 H_indexre<-(-sum(kf1*log(kf1)))
 tfrequency<-as.data.frame(table(truere)) 
-kf2<-tfrequency$Freq/length(truere)
+kf2<-tfrequency$Freq/length(truere) 
 H_truere<-(-sum(kf2*log(kf2)))
-cfrequency<-as.data.frame(table(paste(ccc,truere)))
+cfrequency<-as.data.frame(table(paste(ccc,truere))) 
 kf3<-cfrequency$Freq/length(paste(ccc,truere)) 
 H_paste<-(-sum(kf3*log(kf3)))
 MI<-H_indexre+H_truere- H_paste
@@ -171,6 +176,5 @@ NMI<-MI/sqrt(H_indexre* H_truere)
  return(
 list(NMI=NMI,weight=weight,center=M1,result=ccc)
 )}
-
 
 
