@@ -112,7 +112,7 @@ for (i in (chushi+1):N){
  onC2[i]<-sum(onC1[i,])
      onU[i,]<-onC1[i,]/onC2[i]
       }
-onU[which(onU==NaN)]=0
+onU[is.na(onU)]<-0
        onM2<-matrix(0,K,J)
   onk1<-which.max(onU[i,])
  P2[i]<-onk1
@@ -209,7 +209,6 @@ P1<-c(rep(0,N1))
 D<-diag(N1) 
 Dwave<-alpha*D 
 for (i in (chushi+1):N1){
-
 ling<-matrix(0,N1-chushi,K)
 onU1<-rbind(cU1,ling)
 g = 1
