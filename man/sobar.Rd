@@ -2,35 +2,15 @@
 \alias{sobar}
 \docType{data}
 \title{
-A single-view data set named sobar.
+A single-view data set named Sobar.
 }
 \description{
-A single-view data set named sobar.
+A single-view data set named Sobar. The Sobar data set is a behavioural risk dataset for cervical cancer, which has a number of clusters of 2.
 }
 \usage{data("sobar")}
 \format{
-  A data frame with 72 observations on the following 19 variables.
-  \describe{
-    \item{\code{behavior_sexualRisk}}{a numeric vector}
-    \item{\code{behavior_eating}}{a numeric vector}
-    \item{\code{behavior_personalHygine}}{a numeric vector}
-    \item{\code{intention_aggregation}}{a numeric vector}
-    \item{\code{intention_commitment}}{a numeric vector}
-    \item{\code{attitude_consistency}}{a numeric vector}
-    \item{\code{attitude_spontaneity}}{a numeric vector}
-    \item{\code{norm_significantPerson}}{a numeric vector}
-    \item{\code{norm_fulfillment}}{a numeric vector}
-    \item{\code{perception_vulnerability}}{a numeric vector}
-    \item{\code{perception_severity}}{a numeric vector}
-    \item{\code{motivation_strength}}{a numeric vector}
-    \item{\code{motivation_willingness}}{a numeric vector}
-    \item{\code{socialSupport_emotionality}}{a numeric vector}
-    \item{\code{socialSupport_appreciation}}{a numeric vector}
-    \item{\code{socialSupport_instrumental}}{a numeric vector}
-    \item{\code{empowerment_knowledge}}{a numeric vector}
-    \item{\code{empowerment_abilities}}{a numeric vector}
-    \item{\code{empowerment_desires}}{a numeric vector}
-  }
+  The format is:
+ num [1:72, 1:20] 10 10 10 10 8 10 10 8 10 7 ...
 }
 \details{
 A single-view data set named sobar.
@@ -42,7 +22,6 @@ http://archive.ics.uci.edu/ml/datasets/Cervical+Cancer+Behavior+Risk
 http://archive.ics.uci.edu/ml/datasets/Cervical+Cancer+Behavior+Risk
 }
 \examples{
-data(sobar)
-## maybe str(sobar) ; plot(sobar) ...
+data(sobar); str(sobar) 
 }
 \keyword{datasets}

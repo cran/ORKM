@@ -1,13 +1,13 @@
-#' Caculate the pardon matrix and the estimator on the DMC method
+#' Deep matrix clustering algorithm for multi-view data
 DMC=function(X,K,V,r,lamda,truere,max.iter,method=0){
-#' param X is the data matrix
-#' param K is the number of cluster  
-#' param lamda is the parameter
-#' param r is the banlance parameter
-#' param V is the view of X
-#' param max.iter is the max iter
-#' param truere is the ture label in data set
-#' param method is the caluate the NMI
+#' param X is the multi-view data matrix
+#' param K is the number of clusters in the input data matrix  
+#' param lamda is the parameter of the depth matrix in the DMC algorithm
+#' param r is the banlance parameter of the algorithm
+#' param V is the total views of X
+#' param max.iter is the maximum number of iterations of the algorithm
+#' param truere is the true label vector for the calculated dataset
+#' param method refers to the calculation of the clustering evaluation indicator NMI
 #' 
 #' @return NMI,Alpha1,center,result
 #' @export

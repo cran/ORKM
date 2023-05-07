@@ -1,15 +1,15 @@
 \name{ORKMeans}
 \alias{ORKMeans}
-\title{Caculate the estimator on the ORKMeans method}
+\title{Online regularized K-means clustering algorithm for online multi-view data}
 \description{
-Caculate the estimator on the ORKMeans method
+For the online clustering problem, this function proposes the Online Regularized K-means Clustering (ORKMC) method to deal with online multi-view data. Firstly, for the clustering problem of multi-view data, a non-negative matrix decomposition is used as the starting point of the model to find the indicator matrix and cluster centres of each cluster; for online updating, a projected gradient descent method is proposed to perform online updating to improve the accuracy and speed of data clustering; for the overfitting phenomenon, regularisation is proposed to avoid the above problem. In addition, since the choice of regularization parameters is extremely important to the effectiveness of the ORKMC algorithm, the choice of regularization parameters varies in different datasets. In this paper, a suitable range of regularisation parameters and model parameters is given. The effectiveness of the ORKMC algorithm is tested through an extensive study of multi-view/single-view data. The validity of the ORKMC algorithm is tested through an extensive study of multi-view/single-view data.
 }
 \usage{
 ORKMeans(X,K,V,chushi,r,yita,gamma,alpha,epsilon,truere,max.iter,method=0)
 }
 \arguments{
   \item{X}{
-is the data matrix
+is the online single/multi-view data matrix
 }
   \item{K}{
 is the number of cluster 

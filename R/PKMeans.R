@@ -1,13 +1,12 @@
-#' Caculate the pardon matrix and the estimator on the PKMeans
+#' Power K-means clustering algorithm for single view data
 PKMeans=function(X,K,yitapower,sm,max.m,truere,method=0){
-#' param X is the data matrix
-#' param K is the number of cluster  
-#' param yitapower is the regularized parameter
-#' param sm is the banlance parameter
-#' param chushi is the initial value for online
-#' param max.m is the max iter
-#' param truere is the ture label in data set
-#' param method is the caluate the NMI
+#' param X is the single-view data matrix
+#' param K is the number of clusters in the input data matrix X
+#' param yitapower is the regularization parameter of the PKMC algorithm
+#' param sm is the banlance parameter of the algorithm 
+#' param max.m is the maximum number of iterations of the algorithm
+#' param truere is the true label vector for the calculated dataset
+#' param method refers to the calculation of the clustering evaluation indicator NMI
 #' 
 #' @return center,NMI,result
 #' @export

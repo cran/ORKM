@@ -1,13 +1,13 @@
-#' Caculate the pardon matrix and the estimator on the RKMeans
+#' Regularized K-means clustering algorithm for multi-view data
 RKMeans=function(X,K,V,yita,r,max.iter,truere,method=0){
-#' param X is the data matrix
-#' param K is the number of cluster  
-#' param yita is the regularized parameter
-#' param r is the banlance parameter
-#' param V is the view of X
-#' param max.iter is the max iter
-#' param truere is the ture label in data set
-#' param method is the caluate the NMI
+#' param X is the multi-view data matrix
+#' param K is the number of clusters in the input data matrix  
+#' param yita is the regularization parameter of the algorithm
+#' param r is the banlance parameter of the algorithm
+#' param V is the total views of X
+#' param max.iter is the maximum number of iterations of the algorithm
+#' param truere is the true label vector for the calculated dataset
+#' param method refers to the calculation of the clustering evaluation indicator NMI
 #' 
 #' @return NMI,weight,center,result
 #' @export

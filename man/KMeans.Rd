@@ -1,8 +1,8 @@
 \name{KMeans}
 \alias{KMeans}
-\title{Caculate the estimator on the KMeans method}
+\title{K-means clustering algorithm for multi/single view data}
 \description{
-Caculate the estimator on the KMeans method
+The K-means clustering algorithm is a common clustering algorithm that divides a data set into K clusters, with each cluster represented using the mean of all samples within the cluster, referring to that mean as the j-cluster centre. The algorithm is unsupervised learning, where the categories are not known in advance and similar objects are automatically grouped into the same cluster. The K-means algorithm achieves clustering by calculating the distance between each point and the centre of mass of different clusters and assigning it to the nearest cluster. The algorithm is simple and easy to implement, but is susceptible to the initial centre of mass, the possibility of empty clusters, and the possibility of convergence to local minima. Clustering applications can be used to discover different groups of users, allowing for tasks such as precision marketing, document segmentation, finding people in the same circle in social networks, and handling anomalous data.
 }
 \usage{
 KMeans(X, K, V, r, max.iter, truere, method = 0)

@@ -1,10 +1,10 @@
 \name{RKMeans}
 \alias{RKMeans}
 \title{
-Caculate the pardon matrix and the estimator on the RKMeans
+Regularized K-means clustering algorithm for multi-view data
 }
 \description{
-Caculate the pardon matrix and the estimator on the RKMeans
+This function improves the regularized K-means clustering (RKMC) algorithm for the multi-view data clustering problem. Specifically, the regularisation term is added to the K-means algorithm to avoid overfitting of the data. Numerical analysis shows that the RKMC algorithm significantly improves the clustering performance compared to other methods. In addition, in order to reveal the structure of real data as realistically as possible, improve the clustering accuracy of high-dimensional data, and balance the weights of each view, the RKMC algorithm assigns a series of learnable weight values to each view, thus reflecting the relationship and compatibility of each view more flexibly.
 }
 \usage{
 RKMeans(X, K, V, yita, r, max.iter, truere, method = 0)

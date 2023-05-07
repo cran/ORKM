@@ -1,6 +1,6 @@
 \name{OGD}
 \alias{OGD}
-\title{Caculate the result and the estimator on the OGD}
+\title{Online gradient descent algorithm for online single-view data clustering}
 
 \usage{
 OGD(X, K, gamma, max.m, chushi, yita, epsilon, truere, method = 0)
@@ -29,7 +29,7 @@ OGD(X, K, gamma, max.m, chushi, yita, epsilon, truere, method = 0)
 result,NMI,M
 }
 \description{
-Caculate the pardon matrix and the estimator on the OGD
+Online gradient descent is an optimisation algorithm in machine learning for when the amount of data is too large to process all the data at the same time. In this algorithm, the model parameters are updated based on a single training sample, rather than using the entire training set. The direction of each update is determined by the direction of the gradient of the current sample, and the local or global extremes of the gradient descent algorithm depend on the order of the sampled samples. Compared to Batch Gradient Descent (BGD) algorithm, online gradient descent algorithms can process data streams and update the model as they process the data, and are therefore more efficient for large-scale data. However, online gradient descent algorithm should only be used if the data stream is continuously present and updated.
 }
 \author{
 Miao Yu

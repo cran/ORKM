@@ -1,15 +1,15 @@
 #' Caculate the pardon matrix and the estimator on the OMU
 OMU=function(X,K,V,chushi,yita,r,max.iter,epsilon,truere,method=0){
-#' param X is the data matrix
-#' param K is the number of cluster
-#' param V is the view of X  
-#' param chushi is the initial value
-#' param yita is the regularized parameter
-#' param r is the banlance parameter
-#' param max.iter is the max iter
-#' param epsilon is the epsilon
-#' param truere is the ture label in data set
-#' param method is the caluate the NMI
+#' param X is the online multi-view data matrix
+#' param K is the number of clusters in the input data matrix
+#' param V is the total views of X  
+#' param chushi is the initial value for online algorithm
+#' param yita is the regularization parameter of the algorithm
+#' param r is the banlance parameter of the algorithm
+#' param max.iter is the maximum number of iterations of the algorithm
+#' param epsilon is the algorithm stopping threshold
+#' param truere is the true label vector for the calculated dataset
+#' param method refers to the calculation of the clustering evaluation indicator NMI
 #' 
 #' @return NMI,result,M
 #' @export

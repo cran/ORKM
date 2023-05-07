@@ -1,14 +1,14 @@
 #' Caculate the pardon matrix and the estimator on the OGD
 OGD=function(X,K,gamma,max.m,chushi,yita,epsilon,truere,method=0){
-#' param X is the data matrix
-#' param K is the number of cluster  
-#' param yita is the regularized parameter
-#' param gamma is the step size
-#' param chushi is the initial value
-#' param epsilon is the epsilon of OGD
-#' param max.m is the max iter
-#' param truere is the ture label in data set
-#' param method is the caluate the NMI
+#' param X is the online single-view data matrix
+#' param K is the number of clusters in the input data matrix
+#' param yita is the regularization parameter of the algorithm
+#' param gamma is the step size of the algorithm
+#' param chushi is the initial value for online algorithm
+#' param epsilon is the algorithm stopping threshold
+#' param max.m is the maximum number of iterations of the algorithm
+#' param truere is the true label vector for the calculated dataset
+#' param refers to the calculation of the clustering evaluation indicator NMI
 #' 
 #' @return result,NMI,M
 #' @export

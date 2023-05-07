@@ -1,10 +1,10 @@
 \name{PKMeans}
 \alias{PKMeans}
 \title{
-Caculate the pardon matrix and the estimator on the PKMeans
+Power K-means clustering algorithm for single view data
 }
 \description{
-Caculate the pardon matrix and the estimator on the PKMeans
+The power K-means algorithm is a generalization of the Lloyd algorithm, which approximates the ordinary K-means algorithm by a majorization-minimization method with the descent properties and lower complexity of the Lloyd algorithm. The power K-means embeds the K-means problem into a series of better performing problems. These smooth intermediate problems have a smoother objective function and tend to guide the clustering to find a global minimum with the K-means as the objective. The method has the same iteration complexity as Lloyd's algorithm, reduces sensitivity to initialization, and greatly improves algorithm performance in the high-dimensional case.
 }
 \usage{
 PKMeans(X, K, yitapower, sm, max.m, truere, method = 0)

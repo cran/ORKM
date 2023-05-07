@@ -1,6 +1,6 @@
 \name{OMU}
 \alias{OMU}
-\title{Caculate the pardon matrix and the estimator on the OMU}
+\title{Online multiplicative update algorithm for online multi-view data clustering}
 \usage{
 OMU(X,K,V,chushi,yita,r,max.iter,epsilon,truere,method=0)
 }
@@ -31,7 +31,7 @@ OMU(X,K,V,chushi,yita,r,max.iter,epsilon,truere,method=0)
 NMI,result,M
 }
 \description{
-Caculate the pardon matrix and the estimator on the OMU
+This algorithm integrates the multiplicative normalization factor as an additional term in the original additivity update rule, which usually has approximately opposite direction. Thus, the improved iteration rule can be easily converted to a multiplicative version. After each iteration After each iteration, non-negativity is maintained.
 }
 \examples{
  yita=0.5;V=2;chushi=100;K=3;r=0.5;max.iter=10;n1=n2=n3=70;epsilon=1

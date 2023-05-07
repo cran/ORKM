@@ -5,7 +5,7 @@
 Ture label of Movie data set.
 }
 \description{
-Ture label of Movie data set.
+Ture label of Movie data set. You can use it to calculate the accuracy of the clustering results.
 }
 \usage{data("turelabel")}
 \format{

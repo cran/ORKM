@@ -1,8 +1,8 @@
 \name{DMC}
 \alias{DMC}
-\title{Caculate the estimator on the DMC method}
+\title{Deep matrix clustering algorithm for multi-view data}
 \description{
-Caculate the estimator on the DMC method
+This algorithm decomposes the multi-view data matrix into representative subspaces layer by layer, and generates a cluster at each layer. To enhance the diversity between the generated clusters, new redundant quantifiers arising from the proximity between samples in these subspaces are minimised. An iterative optimisation process is further introduced to simultaneously seek multiple clusters with quality and diversity.
 }
 \usage{
 DMC(X, K, V, r, lamda, truere, max.iter, method = 0)

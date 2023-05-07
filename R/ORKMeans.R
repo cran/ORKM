@@ -1,17 +1,17 @@
-#' Caculate the pardon matrix and the estimator on the online RKMeans
+#' Online regularized K-means clustering algorithm for online multi-view data
 ORKMeans=function(X,K,V,chushi,r,yita,gamma,alpha,epsilon,truere,max.iter,method=0){
-#' param X is the data matrix
-#' param K is the number of cluster  
-#' param yita is the regularized parameter
-#' param r is the banlance parameter
-#' param gamma is the step size
-#' param alpha is the caculated the weight of view
-#' param V is the view of X
-#' param chushi is the initial value for online
-#' param epsilon is the epsilon
-#' param max.iter is the max iter
-#' param truere is the ture label in data set
-#' param method is the caluate the NMI
+#' param X is the online mulit-view data matrix
+#' param K is the number of clusters in the input data matrix 
+#' param yita is the regularization parameter of the algorithm
+#' param r is the banlance parameter of the algorithm
+#' param gamma is the step size of the algorithm
+#' param alpha is the weight of the calculated view
+#' param V is the total views of X
+#' param chushi is the initial value for online algorithm
+#' param epsilon is the algorithm stopping threshold
+#' param max.iter is the maximum number of iterations of the algorithm
+#' param truere is the true label vector for the calculated dataset
+#' param method refers to the calculation of the clustering evaluation indicator NMI
 #' 
 #' @return NMI,weight,center,result
 #' @export

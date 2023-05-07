@@ -18,7 +18,7 @@ INDEX(vec1, vec2, method = 0, mybeta = 0)
 accuracy
 }
 \description{
-Caculate the indication and the estimator on the functions,method=0 purity;method=1,precision; method=2,recall; method=3, F-score; method=4, RI.
+This function contains the calculation of five clustering effect evaluation metrics, specifically, Purity, NMI, F-score, RI, Precision and Recall, which are used to evaluate the clustering effect of the above functions, method=0 purity;method=1,precision; method=2,recall; method=3, F-score; method=4, RI.
 }
 \examples{
 P1<-c(1,1,1,2,3,2,1);truelabel<-c(1,1,1,2,2,2,3)
