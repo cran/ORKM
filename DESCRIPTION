@@ -1,7 +1,7 @@
 Package: ORKM
 Title: The Online Regularized K-Means Clustering Algorithm
-Date: 2023-5-5
-Version: 0.6.0.0
+Date: 2023-5-24
+Version: 0.7.0.0
 Authors@R: c(person("Guangbao", "Guo",role = c("aut", "cre"),
            email = "ggb11111111@163.com",
           comment =  c(ORCID = "0000-0002-4115-6218")),
@@ -23,7 +23,7 @@ Suggests: testthat (>= 3.0.0)
 Imports: MASS, Matrix, stats,
 Config/testthat/edition: 3
 NeedsCompilation: no
-Packaged: 2023-05-05 14:29:59 UTC; 14482
+Packaged: 2023-05-24 13:08:02 UTC; 14482
 Depends: R (>= 3.5.0)
 Repository: CRAN
-Date/Publication: 2023-05-07 02:30:06 UTC
+Date/Publication: 2023-05-25 09:30:03 UTC

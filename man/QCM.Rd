@@ -1,5 +1,5 @@
-\name{QCMX}
-\alias{QCMX}
+﻿\name{QCM}
+\alias{QCM}
 \docType{data}
 \title{
 The QCM data set with K=5.
@@ -7,7 +7,7 @@ The QCM data set with K=5.
 \description{
 Five different QCM gas sensors were used and five different gas measurements were made for each sensor (1-octanol, 1-propanol, 2-butanol, 2-propanol and 1-isobutanol).
 }
-\usage{data("QCMX")}
+\usage{data("QCM")}
 \format{
   The format is:
  num [1:125, 1:15] -10.06 -9.69 -12.07 -14.21 -16.57 ...
@@ -23,6 +23,6 @@ M. F. Adak, P. Lieberzeit, P. Jarujamrus, and N. Yumusak. Classification of alco
 org/10.1016/j.jestch.2019.06.011. URL https://www.sciencedirect.com/science/article/pii/S2215098619303337.
 }
 \examples{
-data(QCMX); str(QCMX) 
+data(QCM); str(QCM) 
 }
-\keyword{datasets}
+\keyword{data sets}

@@ -5,7 +5,7 @@
 A single-view data set named Sobar.
 }
 \description{
-A single-view data set named Sobar. The Sobar data set is a behavioural risk dataset for cervical cancer, which has a number of clusters of 2.
+A single-view data set named Sobar.  Sobar data set is a behavioural risk data set for cervical cancer, which has a number of clusters of 2.
 }
 \usage{data("sobar")}
 \format{
@@ -24,4 +24,4 @@ http://archive.ics.uci.edu/ml/datasets/Cervical+Cancer+Behavior+Risk
 \examples{
 data(sobar); str(sobar) 
 }
-\keyword{datasets}
+\keyword{data sets}

@@ -27,4 +27,4 @@ C. Grimal. the multi-view movie data set. 2010. URL https://lig-membres.imag.fr/
 data(turelabel)
 ## maybe str(turelabel) ; plot(turelabel) ...
 }
-\keyword{datasets}
+\keyword{data sets}
