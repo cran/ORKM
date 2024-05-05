@@ -1,4 +1,4 @@
-f013e3d27221a47f83392a15d242d7cc *DESCRIPTION
+23af804b3f9ebf9273a292880b557709 *DESCRIPTION
 c1dff1d519dc9bd341b58351b90ccaf7 *LICENSE
 8ad8456b46c6eca2b55df303704c544b *NAMESPACE
 97145a0a7d6f3af1766b774020b80702 *R/DMC.R
@@ -9,6 +9,7 @@ c6128162157a01fde7c6e72f4533578c *R/OGD.R
 4fe23f98a039e5f8adef7a265728a4f0 *R/ORKMeans.R
 fe41fd0451b24a1f3821d858a1b4c035 *R/PKMeans.R
 8321f02db2acb911508503457652f75e *R/RKMeans.R
+2337e180ef3bb22f5b36a0fb470f155f *build/partial.rdb
 e549b1453e3c6702aca10773bbce12b2 *data/QCM.rda
 a64987b5127270f88bb9a891a37bad12 *data/Washington_cites.rda
 5b354a2d5f3d80195b4eb83e4519bb03 *data/Washington_content.rda
@@ -29,6 +30,7 @@ f44e908224f34688fffcfab8b8a7c1df *data/cora_view3.rda
 beaa79e1e439bff1557880e81e514271 *data/labelTexas.rda
 1dcd6c55a5351a16dfd1d94fab2fa3ec *data/labelWashington.rda
 2a5a0caf81cb8f04cb312b6391607733 *data/labelWisconsin.rda
+3cf5cb2c298061bae5888f91c3df991e *data/labelcora.rda
 cd40a0a4192189803d191028351d254b *data/labelcornell.rda
 f5311af3c30bc0b215eef377e442a372 *data/movie_1.rda
 1161d5094d2d2497ac6635fc74229131 *data/movie_2.rda
@@ -44,6 +46,7 @@ cc7ea20f47612d90e36c25352a9ee1d1 *data/turelabel.rda
 13f111d7b433ecdb916912e97e90c572 *man/KMeans.Rd
 b22a3cbadbc71ae6bdb05fe9d0747ef6 *man/OGD.Rd
 43525fd173b6758beecdaca54ddad38f *man/OMU.Rd
+c9b5349aa3f7e855a9bdd79ae41c6c42 *man/ORKM-package.Rd
 5107916fd06162422a6ac7c9bc055b93 *man/ORKMeans.Rd
 a573ba63611f7d7118628b9e459379e0 *man/PKMeans.Rd
 1b47b665f5ce60926db910662a4d2e94 *man/QCM.Rd
@@ -67,6 +70,7 @@ b3ddfe246517f84f7723b728a1d690a7 *man/cornell_inbound.Rd
 4d0f4a53f113b21a00bba4681cda4dda *man/labelTexas.Rd
 bb30fc04ad31d9193c769525c906530d *man/labelWashington.Rd
 c1292cd55b1227c6a45064ef6edb0224 *man/labelWisconsin.Rd
+ef67fcce96653d61fbe03f4befcaaeee *man/labelcora.Rd
 78b16c94cb095fc372ec6c63f12415cc *man/labelcornell.Rd
 c714f08b6de5e91c55023ec08995d113 *man/movie_1.Rd
 5272c0feb581c77ae6127c6ebafb2ad1 *man/movie_2.Rd
